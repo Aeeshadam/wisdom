@@ -36,3 +36,5 @@ const Nav = ({ isOpen }) => {
     </div>
   );
 };
+
+export default Nav;

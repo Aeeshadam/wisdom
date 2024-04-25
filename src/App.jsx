@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
-import Sidebar from "./Sidebar";
+import Sidebar from "./components/Sidebar";
 import Dictionary from "./pages/Dictionary";
 import History from "./pages/History";
 import Favorites from "./pages/Favorites";
