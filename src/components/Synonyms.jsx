@@ -1,5 +1,9 @@
 import React from "react";
-const Synonyms = ({ meanings }) => {
+import { useDictionary } from "./DictionaryContext";
+const Synonyms = () => {
+  const { results } = useDictionary();
+  const meanings = results?.meanings;
+
   if (!meanings) return null;
   const synonymsArray = meanings.map((meaning) => meaning.synonyms).flat();
   if (synonymsArray.length === 0) return null;

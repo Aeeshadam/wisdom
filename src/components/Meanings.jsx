@@ -1,4 +1,8 @@
-const Meanings = ({ meanings }) => {
+import { useDictionary } from "./DictionaryContext";
+
+const Meanings = () => {
+  const { results } = useDictionary();
+  const meanings = results?.meanings;
   if (!meanings) return null;
   return (
     <>

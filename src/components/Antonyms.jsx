@@ -1,6 +1,10 @@
 import React from "react";
+import { useDictionary } from "./DictionaryContext";
 
-const Antonyms = ({ meanings }) => {
+const Antonyms = () => {
+  const { results } = useDictionary();
+  const meanings = results?.meanings;
+
   if (!meanings) return null;
   const antonymsArray = meanings.map((meaning) => meaning.antonyms).flat();
   if (antonymsArray.length === 0) return null;

@@ -4,19 +4,13 @@ import Logo from "./Logo";
 import Menu from "./Menu";
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handletoggle() {
-    setIsOpen(!isOpen);
-  }
-
   return (
     <div className="fixed lg:sticky top-0 w-full h-max lg:w-96 lg:h-screen bg-white  p-8">
       <div className="flex items-center justify-between">
         <Logo />
-        <Menu toggleMenu={() => handletoggle()} className="md:hidden" />
+        <Menu className="md:hidden" />
       </div>
-      <Nav isOpen={isOpen} />
+      <Nav />
     </div>
   );
 };

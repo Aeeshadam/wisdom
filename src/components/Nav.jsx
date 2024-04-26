@@ -6,13 +6,16 @@ import {
   faFloppyDisk,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
+import { useDictionary } from "../components/DictionaryContext";
 
 const navItems = [
   { to: "/", icon: faBook, text: "Dictionary" },
   { to: "/history", icon: faFloppyDisk, text: "History" },
   { to: "/favorites", icon: faStar, text: "Favorites" },
 ];
-const Nav = ({ isOpen }) => {
+const Nav = () => {
+  const { isOpen } = useDictionary();
+
   return (
     <div
       className={`text-gray-500 mt-16 ${
