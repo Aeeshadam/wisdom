@@ -53,9 +53,6 @@ const Dictionary = () => {
       setIsLoading(false);
     }
   }
-  useEffect(() => {
-    console.log(results); // Moved console log to a separate useEffect
-  }, [results]);
 
   return (
     <div className="w-full  bg-violet-50 flex flex-col lg:flex-row ">
