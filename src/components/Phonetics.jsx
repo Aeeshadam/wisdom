@@ -4,27 +4,8 @@ import { useDictionary } from "./DictionaryContext";
 import { useEffect, useState } from "react";
 
 const Phonetics = () => {
-  const { results } = useDictionary();
+  const { results, isLoading, addFave } = useDictionary();
   const { word, phonetics, meanings } = results;
-  const [faves, setFaves] = useState([]);
-
-  const addFave = (results) => {
-    if (!results) return;
-    setFaves((prevFaves) => {
-      const updatedFaves = [...prevFaves, { likedword: results }];
-
-      localStorage.setItem("faves", JSON.stringify([updatedFaves]));
-      console.log(updatedFaves);
-      return updatedFaves;
-    });
-  };
-
-  useEffect(() => {
-    const storedFaves = localStorage.getItem("faves");
-    if (storedFaves) {
-      setFaves(JSON.parse(storedFaves));
-    }
-  }, []);
 
   const playAudio = () => {
     let audioUrl = "";

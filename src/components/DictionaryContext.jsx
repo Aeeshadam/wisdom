@@ -8,6 +8,10 @@ function DictionaryProvider({ children }) {
   const [results, setResults] = useState([]);
   const [pictures, setPictures] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [showNoResultsAlert, setShowNoResultsAlert] = useState(false);
+  const [faves, setFaves] = useState(() =>
+    JSON.parse(localStorage.getItem("faves") || "[]")
+  );
 
   //function to toggle mobile nav
   function handletoggle() {
@@ -19,6 +23,9 @@ function DictionaryProvider({ children }) {
       if (e.key === "Enter") {
         fetchWord();
         fetchPictures();
+      } else {
+        // Reset the showNoResultsAlert state when typing to search another word
+        setShowNoResultsAlert(false);
       }
     };
 
@@ -33,6 +40,11 @@ function DictionaryProvider({ children }) {
   const number = 3;
   async function fetchPictures() {
     try {
+      if (!word) {
+        console.error("Search is null");
+        return;
+      }
+      setIsLoading(true);
       const response = await fetch(
         `https://api.pexels.com/v1/search?query=${word}&per_page=${number}`,
         {
@@ -44,13 +56,17 @@ function DictionaryProvider({ children }) {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to fetch photos");
+        setShowNoResultsAlert(true);
+        setIsLoading(false); // Set loading to false since there's no response
+        return;
       }
       const data = await response.json();
       setPictures(data.photos);
     } catch (error) {
       console.error("Unhandled exception: ", error);
       alert("There was an error loading pictures");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -67,12 +83,14 @@ function DictionaryProvider({ children }) {
         `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
       );
 
-      if (!response) {
-        console.error("Response is null");
+      if (!response.ok) {
+        setShowNoResultsAlert(true);
+        setIsLoading(false); // Set loading to false since there's no response
         return;
       }
 
       const data = await response.json();
+      setResults(data[0]);
 
       setResults(data[0]);
     } catch (error) {
@@ -81,6 +99,25 @@ function DictionaryProvider({ children }) {
       setIsLoading(false);
     }
   }
+
+  //function to add to faves
+  const addFave = (newFave) => {
+    if (!newFave) return;
+
+    setFaves((prevFaves) => {
+      const updatedFaves = [...prevFaves, newFave];
+
+      localStorage.setItem("faves", JSON.stringify(updatedFaves));
+      return updatedFaves;
+    });
+  };
+
+  useEffect(() => {
+    const storedFaves = localStorage.getItem("faves");
+    if (storedFaves) {
+      setFaves(JSON.parse(storedFaves));
+    }
+  }, [word]);
 
   return (
     <DictionaryContext.Provider
@@ -94,6 +131,9 @@ function DictionaryProvider({ children }) {
         pictures,
         isOpen,
         handletoggle,
+        showNoResultsAlert,
+        addFave,
+        faves,
       }}
     >
       {children}

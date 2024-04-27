@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDictionary } from "../components/DictionaryContext";
+import Spinner from "./Spinner";
 
 const Pictures = () => {
-  const { word, pictures } = useDictionary();
-  if (pictures && pictures.length > 0) {
+  const { word, results, pictures, isLoading } = useDictionary();
+
+  if (isLoading) return <Spinner />;
+  if (results && pictures && pictures.length > 0) {
     return (
       <div className="card flex flex-wrap">
         {pictures.map((picture) => (
