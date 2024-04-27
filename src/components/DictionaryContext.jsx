@@ -101,7 +101,7 @@ function DictionaryProvider({ children }) {
   }
 
   //function to add to faves
-  const addFave = (newFave) => {
+  const addToFave = (newFave) => {
     if (!newFave) return;
 
     setFaves((prevFaves) => {
@@ -119,6 +119,19 @@ function DictionaryProvider({ children }) {
     }
   }, [word]);
 
+  const deleteFave = (fave) => {
+    setFaves((prevFaves) => {
+      const updatedFaves = prevFaves.filter((f) => f.word !== fave.word);
+      localStorage.setItem("faves", JSON.stringify(updatedFaves));
+      return updatedFaves;
+    });
+  };
+
+  const deleteAllFaves = () => {
+    setFaves([]);
+    localStorage.removeItem("faves");
+  };
+
   return (
     <DictionaryContext.Provider
       value={{
@@ -132,8 +145,10 @@ function DictionaryProvider({ children }) {
         isOpen,
         handletoggle,
         showNoResultsAlert,
-        addFave,
+        addToFave,
         faves,
+        deleteFave,
+        deleteAllFaves,
       }}
     >
       {children}

@@ -4,7 +4,7 @@ import { useDictionary } from "./DictionaryContext";
 import { useEffect, useState } from "react";
 
 const Phonetics = () => {
-  const { results, isLoading, addFave } = useDictionary();
+  const { results, isLoading, addToFave } = useDictionary();
   const { word, phonetics, meanings } = results;
 
   const playAudio = () => {
@@ -32,8 +32,8 @@ const Phonetics = () => {
       </div>
       <div className="flex items-center text-xl lg:text-2xl">
         <button
-          className="py-2 px-4 border border-violet-600 rounded-lg mr-4  hover:bg-violet-200 ease-in duration-500 flex-wrap"
-          onClick={() => addFave(results)}
+          className="py-2 px-4 border border-violet-600 rounded-lg mr-4  hover:bg-violet-200 transition flex-wrap"
+          onClick={() => addToFave(results)}
         >
           Add {word} to favorites
         </button>
