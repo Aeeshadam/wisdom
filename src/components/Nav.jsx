@@ -10,7 +10,6 @@ import { useDictionary } from "../components/DictionaryContext";
 
 const navItems = [
   { to: "/", icon: faBook, text: "Dictionary" },
-  { to: "/history", icon: faFloppyDisk, text: "History" },
   { to: "/favorites", icon: faStar, text: "Favorites" },
 ];
 const Nav = () => {
