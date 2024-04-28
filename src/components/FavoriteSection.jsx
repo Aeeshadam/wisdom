@@ -10,12 +10,14 @@ const Favorites = () => {
       <div className="card">
         <div className="flex justify-between items-center">
           <h3 className="mb-4">Favourite Words</h3>
-          <button
-            className="text-red-500 py-2 px-6 border-red-100 border-2 rounded-lg text-2xl hover:bg-red-100 cursor-pointer transition "
-            onClick={deleteAllFaves}
-          >
-            Delete all
-          </button>
+          {faves.length > 0 && (
+            <button
+              className="text-red-500 py-2 px-6 border-red-100 border-2 rounded-lg text-2xl hover:bg-red-100 cursor-pointer transition "
+              onClick={deleteAllFaves}
+            >
+              Delete all
+            </button>
+          )}
         </div>
         <ul>
           {faves.map((fave) => (

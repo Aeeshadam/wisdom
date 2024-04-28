@@ -3,26 +3,32 @@ import { createContext, useContext, useEffect, useState } from "react";
 const DictionaryContext = createContext();
 
 function DictionaryProvider({ children }) {
-  const [word, setWord] = useState("");
+  const [word, setWord] = useState("welcome");
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState([]);
   const [pictures, setPictures] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [showNoResultsAlert, setShowNoResultsAlert] = useState(false);
+  const [showNoPicturesAlert, setShowNoPicturesAlert] = useState(false);
   const [faves, setFaves] = useState(() =>
     JSON.parse(localStorage.getItem("faves") || "[]")
   );
 
   //function to toggle mobile nav
-  function handletoggle() {
+  const handletoggle = () => {
     setIsOpen(!isOpen);
-  }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchWord();
+    fetchPictures();
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Enter") {
-        fetchWord();
-        fetchPictures();
+        handleSubmit(e);
       } else {
         // Reset the showNoResultsAlert state when typing to search another word
         setShowNoResultsAlert(false);
@@ -38,7 +44,7 @@ function DictionaryProvider({ children }) {
 
   //function to fetch pictures
   const number = 3;
-  async function fetchPictures() {
+  const fetchPictures = async () => {
     try {
       if (!word) {
         console.error("Search is null");
@@ -56,7 +62,7 @@ function DictionaryProvider({ children }) {
       );
 
       if (!response.ok) {
-        setShowNoResultsAlert(true);
+        setShowNoPicturesAlert(true);
         setIsLoading(false); // Set loading to false since there's no response
         return;
       }
@@ -68,10 +74,10 @@ function DictionaryProvider({ children }) {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   //function to fetch word from dictionary API
-  async function fetchWord() {
+  const fetchWord = async () => {
     try {
       if (!word) {
         console.error("Search is null");
@@ -98,7 +104,7 @@ function DictionaryProvider({ children }) {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   //function to add to faves
   const addToFave = (newFave) => {
@@ -132,6 +138,12 @@ function DictionaryProvider({ children }) {
     localStorage.removeItem("faves");
   };
 
+  //To populate the page on mount
+  useEffect(() => {
+    fetchWord();
+    fetchPictures();
+  }, []);
+
   return (
     <DictionaryContext.Provider
       value={{
@@ -145,10 +157,12 @@ function DictionaryProvider({ children }) {
         isOpen,
         handletoggle,
         showNoResultsAlert,
+        showNoPicturesAlert,
         addToFave,
         faves,
         deleteFave,
         deleteAllFaves,
+        handleSubmit,
       }}
     >
       {children}
