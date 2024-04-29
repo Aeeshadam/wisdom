@@ -5,10 +5,10 @@ import { NavLink } from "react-router-dom";
 const Logo = () => {
   return (
     <NavLink
-      className="ml-6 text-black-600 text-4xl font-extrabold flex cursor-pointer"
+      className="logo ml-6 text-gray-500 font-extrabold flex items-center cursor-pointer"
       to="/"
     >
-      <FontAwesomeIcon icon={faPenNib} className="text-violet-600 mx-2" />
+      <FontAwesomeIcon icon={faPenNib} className=" mx-2" />
       <h1>WISDOM</h1>
     </NavLink>
   );
