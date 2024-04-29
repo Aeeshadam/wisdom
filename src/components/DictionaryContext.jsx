@@ -9,7 +9,9 @@ function DictionaryProvider({ children }) {
   const [pictures, setPictures] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [showNoResultsAlert, setShowNoResultsAlert] = useState(false);
+  const [showConfirmationAlert, setConfirmationAlert] = useState(false);
   const [showNoPicturesAlert, setShowNoPicturesAlert] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
   const [faves, setFaves] = useState(() =>
     JSON.parse(localStorage.getItem("faves") || "[]")
   );
@@ -111,9 +113,24 @@ function DictionaryProvider({ children }) {
     if (!newFave) return;
 
     setFaves((prevFaves) => {
-      const updatedFaves = [...prevFaves, newFave];
+      const isAlreadyFave = faves.some((f) => f.word === newFave.word);
 
+      if (isAlreadyFave) {
+        setConfirmationMessage(`⛔️ "${newFave.word}" is already in favorites`);
+        setConfirmationAlert(true);
+        setTimeout(() => {
+          setConfirmationAlert(false);
+        }, 2000);
+        return prevFaves;
+      }
+
+      const updatedFaves = [...prevFaves, newFave];
       localStorage.setItem("faves", JSON.stringify(updatedFaves));
+      setConfirmationAlert(true);
+      setConfirmationMessage(`✅ "${newFave.word}" added to favorites`);
+      setTimeout(() => {
+        setConfirmationAlert(false);
+      }, 2000);
       return updatedFaves;
     });
   };
@@ -163,6 +180,8 @@ function DictionaryProvider({ children }) {
         deleteFave,
         deleteAllFaves,
         handleSubmit,
+        showConfirmationAlert,
+        confirmationMessage,
       }}
     >
       {children}

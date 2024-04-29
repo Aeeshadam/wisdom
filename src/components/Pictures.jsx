@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useDictionary } from "../components/DictionaryContext";
 import Spinner from "./Spinner";
 
@@ -10,7 +11,7 @@ const Pictures = () => {
     return (
       <div className="card flex flex-wrap">
         {pictures.map((picture) => (
-          <div key={picture.id} className="w-1/3 flex flex-wrap py-0 px-2">
+          <div key={uuidv4()} className="w-1/3 flex flex-wrap py-0 px-2">
             <img
               key={picture.id}
               src={picture.src.landscape}

@@ -10,7 +10,7 @@ import NoResults from "./NoResults";
 export const Results = () => {
   const { results, isLoading, showNoResultsAlert, showNoPicturesAlert } =
     useDictionary();
-  if (isLoading) return <Spinner />;
+  // if (isLoading) return <Spinner />;
   if (showNoResultsAlert || showNoPicturesAlert) return <NoResults />;
   if (results && results.phonetics && results.phonetics.length > 0) {
     return (

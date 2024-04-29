@@ -1,5 +1,6 @@
 import React from "react";
 import { useDictionary } from "./DictionaryContext";
+import { v4 as uuidv4 } from "uuid";
 
 const Antonyms = () => {
   const { results } = useDictionary();
@@ -12,9 +13,9 @@ const Antonyms = () => {
     <div className="card">
       <h3 className="capitalize mb-4">Antonyms</h3>
       {meanings.map((meaning) => (
-        <div key={meaning.partOfSpeech}>
+        <div key={uuidv4()}>
           {meaning.antonyms.map((antonym, index) => (
-            <React.Fragment key={antonym}>
+            <React.Fragment key={uuidv4()}>
               <p className="inline text-gray-500 mb-2">{antonym}</p>
               {index < meaning.antonyms.length - 1 && <span>, </span>}
             </React.Fragment>

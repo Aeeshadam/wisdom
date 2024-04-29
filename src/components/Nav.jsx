@@ -7,6 +7,7 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDictionary } from "../components/DictionaryContext";
+import { v4 as uuidv4 } from "uuid";
 
 const navItems = [
   { to: "/", icon: faBook, text: "Dictionary" },
@@ -23,7 +24,7 @@ const Nav = () => {
     >
       {navItems.map((item, index) => (
         <NavLink
-          key={index}
+          key={uuidv4()}
           to={item.to}
           style={({ isActive }) => ({ color: isActive ? "#7c3aed" : "" })}
           onClick={() => handleToggle()}

@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { useDictionary } from "./DictionaryContext";
-import { useEffect, useState } from "react";
 
 const Phonetics = () => {
   const { results, isLoading, addToFave } = useDictionary();

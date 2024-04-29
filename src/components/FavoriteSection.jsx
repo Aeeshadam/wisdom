@@ -35,7 +35,7 @@ const Favorites = () => {
               <FontAwesomeIcon
                 icon={faTrash}
                 onClick={() => deleteFave(fave)}
-                className="cursor-pointer text-red-400 hover:text-red-600 transition"
+                className="pl-6 cursor-pointer text-red-400 hover:text-red-600 transition"
               />
             </li>
           ))}
