@@ -6,6 +6,7 @@ import Footer from "./Footer";
 
 const Favorites = () => {
   const { faves, deleteFave, deleteAllFaves } = useDictionary();
+
   return (
     <div className="section h-screen">
       <div className="card">
@@ -20,6 +21,7 @@ const Favorites = () => {
             </button>
           )}
         </div>
+
         <ul>
           {faves.map((fave, index) => (
             <li
@@ -42,6 +44,12 @@ const Favorites = () => {
           ))}
         </ul>
       </div>
+      {faves.length === 0 && (
+        <p className="card">
+          Start adding words to the favourites list by clicking on the &quot;Add
+          to Favourites&quot; button on the dictionary😀
+        </p>
+      )}
       <Footer />
     </div>
   );
