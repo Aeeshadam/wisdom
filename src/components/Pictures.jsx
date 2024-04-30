@@ -8,14 +8,14 @@ const Pictures = () => {
   if (isLoading) return <Spinner />;
   if (results && pictures && pictures.length > 0) {
     return (
-      <div className="card flex flex-wrap">
+      <div className="card grid grid-cols-3 gap-4 ">
         {pictures.map((picture, index) => (
-          <div key={index} className="w-1/3 flex flex-wrap py-0 px-2">
+          <div key={index}>
             <img
               key={picture.id}
               src={picture.src.landscape}
               alt={picture.alt}
-              className="w-full object-cover rounded-lg "
+              className="w-full object-cover rounded-lg inline-block "
             />
           </div>
         ))}

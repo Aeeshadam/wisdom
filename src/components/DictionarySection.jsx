@@ -23,13 +23,12 @@ const DictionarySection = () => {
           <h3 className="mb-4">Which word will you like to look up?</h3>
           <form
             onSubmit={handleSubmit}
-            className="flex justify-between items-center w-full  p-6 border border-gray-300 rounded-lg placeholder:text-gray-300"
+            className="flex justify-between items-center w-full p-2 lg:p-6 border border-gray-300 rounded-lg placeholder:text-gray-300"
           >
             <input
               value={word}
               onChange={(e) => setWord(e.target.value)}
               type="text"
-              autoFocus={true}
               className="w-full outline-none"
               placeholder="Search..."
             />
