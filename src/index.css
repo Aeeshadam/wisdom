@@ -73,14 +73,11 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 7rem 0;
-  padding: 2rem;
+  padding: 9rem 2rem 0 2rem;
   width: 100%;
-  min-height: 100vh;
 
   @media screen and (min-width: 768px) {
-    padding: 6rem;
-    margin: 7rem 0;
+    padding: 13rem 6rem 0 6rem;
   }
 }
 

@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useDictionary } from "./DictionaryContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Footer from "./Footer";
 
 const Favorites = () => {
   const { faves, deleteFave, deleteAllFaves } = useDictionary();
   return (
-    <div className="section">
+    <div className="section h-screen">
       <div className="card">
         <div className="flex justify-between items-center">
           <h3 className="mb-4">Favourite Words</h3>
@@ -41,6 +42,7 @@ const Favorites = () => {
           ))}
         </ul>
       </div>
+      <Footer />
     </div>
   );
 };

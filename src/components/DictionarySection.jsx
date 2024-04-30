@@ -3,6 +3,7 @@ import Pictures from "./Pictures";
 import { Results } from "./Results";
 import { useDictionary } from "./DictionaryContext";
 import Confirmation from "./Confirmation";
+import Footer from "./Footer";
 
 const DictionarySection = () => {
   const {
@@ -18,7 +19,7 @@ const DictionarySection = () => {
       {showConfirmationAlert && (
         <Confirmation>{confirmationMessage}</Confirmation>
       )}
-      <div className="section ">
+      <div className="section">
         <div className="card">
           <h3 className="mb-4">Which word will you like to look up?</h3>
           <form
@@ -40,6 +41,7 @@ const DictionarySection = () => {
         <PicturesGallery />
         <Results />
       </div>
+      <Footer />
     </div>
   );
 };

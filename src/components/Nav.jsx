@@ -17,7 +17,7 @@ const Nav = () => {
 
   return (
     <div
-      className={`text-gray-500 mt-16 ${
+      className={`text-gray-500 mt-6 lg:mt-16 ${
         isOpen ? "block" : "hidden"
       } lg:block ease-in duration-700`}
     >
@@ -28,7 +28,7 @@ const Nav = () => {
           style={({ isActive }) => ({ color: isActive ? "#7c3aed" : "" })}
           onClick={() => handleToggle()}
         >
-          <div className="duration-700 rounded-l-lg flex items-center m-6 pt-4 w-full hover:text-violet-600">
+          <div className="duration-700 rounded-l-lg flex items-center lg:m-6 my-6 mx-0 pt-4 w-full hover:text-violet-600">
             <div className="w-10 h-10 flex items-center justify-center">
               <FontAwesomeIcon icon={item.icon} />
             </div>
