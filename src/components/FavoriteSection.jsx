@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDictionary } from "./DictionaryContext";
-import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
 const Favorites = () => {
   const { faves, deleteFave, deleteAllFaves } = useDictionary();
   return (
@@ -20,9 +20,9 @@ const Favorites = () => {
           )}
         </div>
         <ul>
-          {faves.map((fave) => (
+          {faves.map((fave, index) => (
             <li
-              key={uuidv4()}
+              key={index}
               className="border border-violet-100 rounded-lg p-4 mb-4 flex justify-between items-center"
             >
               <div>

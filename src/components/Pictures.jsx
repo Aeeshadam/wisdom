@@ -10,8 +10,8 @@ const Pictures = () => {
   if (results && pictures && pictures.length > 0) {
     return (
       <div className="card flex flex-wrap">
-        {pictures.map((picture) => (
-          <div key={uuidv4()} className="w-1/3 flex flex-wrap py-0 px-2">
+        {pictures.map((picture, index) => (
+          <div key={index} className="w-1/3 flex flex-wrap py-0 px-2">
             <img
               key={picture.id}
               src={picture.src.landscape}
