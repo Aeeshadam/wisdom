@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useDictionary } from "../components/DictionaryContext";
 import Spinner from "./Spinner";
 
