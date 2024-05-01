@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBook,
@@ -21,9 +22,9 @@ const Nav = () => {
         isOpen ? "block" : "hidden"
       } lg:block ease-in duration-700`}
     >
-      {navItems.map((item, index) => (
+      {navItems.map((item) => (
         <NavLink
-          key={index}
+          key={uuidv4()}
           to={item.to}
           style={({ isActive }) => ({ color: isActive ? "#7c3aed" : "" })}
           onClick={() => handleToggle()}
