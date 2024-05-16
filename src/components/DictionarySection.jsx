@@ -38,7 +38,7 @@ const DictionarySection = () => {
             </button>
           </form>
         </div>
-        <PicturesGallery />
+        {/*  <PicturesGallery /> */}
         <Results />
       </div>
       <Footer />
