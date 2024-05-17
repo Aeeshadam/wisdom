@@ -99,8 +99,6 @@ function DictionaryProvider({ children }) {
 
       const data = await response.json();
       setResults(data[0]);
-
-      setResults(data[0]);
     } catch (error) {
       alert("There was an error loading data");
     } finally {

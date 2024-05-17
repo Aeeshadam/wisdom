@@ -1,5 +1,4 @@
 import PicturesGallery from "./Pictures";
-import Pictures from "./Pictures";
 import { Results } from "./Results";
 import { useDictionary } from "./DictionaryContext";
 import Confirmation from "./Confirmation";

@@ -1,26 +1,52 @@
-import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { useDictionary } from "./DictionaryContext";
 
 const Phonetics = () => {
-  const { results, isLoading, addToFave } = useDictionary();
-  const { word, phonetics, meanings } = results;
+  const { results, addToFave } = useDictionary();
+  const { word, phonetics } = results;
 
   const playAudio = () => {
-    let audioUrl = "";
-    for (let i = 0; i < results.phonetics.length; i++) {
-      if (results.phonetics[i].audio) {
-        audioUrl = results.phonetics[i].audio;
-        break;
-      }
-    }
-    if (audioUrl !== "") {
-      const audio = new Audio(audioUrl);
-      audio.play();
-    } else {
+    const audioUrls = results.phonetics.map((p) => p.audio).filter(Boolean);
+    if (audioUrls.length === 0) {
       alert("No audio available");
+      return;
     }
+
+    let alertShown = false;
+
+    const playNextAudio = (index) => {
+      if (index >= audioUrls.length) {
+        if (!alertShown) {
+          alert("All audio sources failed");
+          alertShown = true;
+        }
+        return;
+      }
+
+      const audio = new Audio(audioUrls[index]);
+      let timeout;
+
+      audio.oncanplaythrough = () => {
+        clearTimeout(timeout);
+        audio.play().catch(() => {
+          playNextAudio(index + 1);
+        });
+      };
+
+      audio.onerror = () => {
+        clearTimeout(timeout);
+        playNextAudio(index + 1);
+      };
+
+      timeout = setTimeout(() => {
+        audio.onerror();
+      }, 1000);
+
+      audio.load();
+    };
+
+    playNextAudio(0);
   };
 
   if (!phonetics) return null;
