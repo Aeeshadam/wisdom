@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
-import Sidebar from "./components/Sidebar";
 import Dictionary from "./pages/Dictionary";
 import Favorites from "./pages/Favorites";
 import PageNotFound from "./pages/PageNotFound";
